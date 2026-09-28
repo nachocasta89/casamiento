@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="es" data-tpl="terracota">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nacho y Mili · 27.03.2027</title>
+<meta name="description" content="Nos casamos el 27 de marzo de 2027 en Salta. ¡Te esperamos!">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nacho y Mili · Nos casamos">
+<meta property="og:description" content="Sábado 27 de marzo de 2027 · Buena Vista, Salta">
+<meta property="og:image" content="https://nachocasta89.github.io/casamiento/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:url" content="https://nachocasta89.github.io/casamiento/">
+<meta name="theme-color" content="#B8522F">
+<meta name="robots" content="noindex">
+<style>html{-webkit-text-size-adjust:100%} body{margin:0} img{max-width:100%}</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
+<style>
+  /* Una sola tipografía y un solo color de texto por plantilla. Cada plantilla es un mundo propio: no sigue el tema claro/oscuro del visor. */
+  /* --ink: texto · --head: títulos y botones · --deep: franjas oscuras · --on-deep: texto sobre franjas · --accent2: detalles sobre franjas */
+  :root, :root[data-tpl="salvia"]{
+    --bg:#F5F7F2; --ink:#55704D; --ink-soft:#6F8768; --head:#4A6443; --line:#D5DECF; --soft:#E6EDE0; --card:#FFFFFF; --outer:#E1E7DB; --on-ink:#FFFFFF;
+    --deep:#3F5638; --on-deep:#F1F4EC; --accent2:#C2D1B2;
+  }
+  :root[data-tpl="borravino"]{
+    --bg:#FBF6F3; --ink:#5E2A2F; --ink-soft:#80494E; --head:#6E1F2A; --line:#EAD6D3; --soft:#F3E4E0; --card:#FFFFFF; --outer:#EEE0DC; --on-ink:#FFFFFF;
+    --deep:#6E1F2A; --on-deep:#F8ECE8; --accent2:#D9A3A3;
+  }
+  :root[data-tpl="terracota"]{
+    --bg:#FBF4EC; --ink:#6C4A3E; --ink-soft:#86645A; --head:#B8522F; --line:#EDD9C8; --soft:#F3E2D2; --card:#FFFFFF; --outer:#EFE0D2; --on-ink:#FFFFFF;
+    --deep:#B8522F; --on-deep:#FBF1E8; --accent2:#F0C4A6;
+  }
+  /* Franjas: invierten los colores de la sección */
+  .s-tint{background:var(--soft);}
+  .s-deep{background:var(--deep); --ink:var(--on-deep); --ink-soft:color-mix(in srgb, var(--on-deep) 80%, transparent);
+          --head:var(--on-deep); --line:color-mix(in srgb, var(--on-deep) 22%, transparent); --on-ink:var(--deep); --card:color-mix(in srgb, var(--on-deep) 8%, transparent);}
+  .s-deep .ill{color:var(--accent2);}
+  section.s-deep + section, section + section.s-deep, footer.s-deep{border-top-color:transparent;}
+  :root{ --font:"Cormorant Garamond", "Cormorant", Garamond, Georgia, serif; --r:12px; }
+
+  [hidden]{display:none!important;}
+  html,body{background:var(--outer);}
+  body{margin:0; transition:background .4s;}
+  .wrap{max-width:460px; margin:0 auto;}
+  .inv{background:var(--bg); color:var(--ink); font-family:var(--font); font-size:19px; line-height:1.5; font-weight:500;
+       box-shadow:0 0 0 1px var(--line); position:relative; overflow:hidden; transition:background .4s,color .4s;}
+  .inv *{box-sizing:border-box;}
+  p{margin:0;}
+
+  /* ---------- Portada ---------- */
+  .hero{position:relative; height:100svh; min-height:560px; max-height:900px; background:#8E9A88 52% center/cover no-repeat;}
+  .hero.placeholder{background-image:linear-gradient(170deg,#AEB8A8 0%,#8E9A88 50%,#6F7B69 100%);}
+  .veil{position:absolute; inset:0 0 auto 0; height:48%; z-index:1;
+        background:linear-gradient(to bottom, rgba(20,24,18,.38), rgba(20,24,18,0));
+        -webkit-backdrop-filter:blur(7px); backdrop-filter:blur(7px);
+        -webkit-mask-image:linear-gradient(to bottom,#000 35%,transparent); mask-image:linear-gradient(to bottom,#000 35%,transparent);}
+  .hero-text{position:absolute; top:0; left:0; right:0; z-index:2; padding:calc(64px + env(safe-area-inset-top,0px)) 24px 0;
+             text-align:center; color:#fff; display:flex; flex-direction:column; align-items:center; gap:6px;}
+  .names{font-family:var(--font); font-weight:400; font-style:italic; font-size:clamp(3.4rem,16vw,4.9rem); line-height:1; margin:0;
+         text-shadow:0 0 22px rgba(0,0,0,.28);}
+  .tagline{font-size:1rem; letter-spacing:.34em; text-transform:uppercase; font-weight:500; text-shadow:0 0 14px rgba(0,0,0,.3);}
+  .photo-tag{position:absolute; top:62%; left:50%; transform:translate(-50%,-50%); z-index:2; font-size:.8rem; letter-spacing:.14em;
+             text-transform:uppercase; color:rgba(255,255,255,.85); border:1px dashed rgba(255,255,255,.7); padding:10px 16px; border-radius:999px; white-space:nowrap;}
+  .hero:not(.placeholder) .photo-tag{display:none;}
+  .scroll-hint{position:absolute; left:50%; bottom:28px; z-index:2; width:18px; height:18px; margin-left:-9px;
+               border-right:1.5px solid #fff; border-bottom:1.5px solid #fff; transform:rotate(45deg); opacity:.85; animation:bob 2.2s ease-in-out infinite;}
+  @keyframes bob{0%,100%{translate:0 0}50%{translate:0 6px}}
+
+  /* ---------- Secciones ---------- */
+  section,footer{color:var(--ink);}
+  section{padding:56px 28px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:14px;}
+  section + section{border-top:1px solid var(--line);}
+  .ill{width:92px; height:auto; color:var(--head); margin-bottom:2px;}
+  .ill.sm{width:64px;}
+  h2{font-family:var(--font); font-weight:500; font-style:italic; font-size:2.2rem; line-height:1.1; margin:0; color:var(--head); text-wrap:balance;}
+  .soft{color:var(--ink-soft);}
+  .label{font-size:.78rem; letter-spacing:.24em; text-transform:uppercase; color:var(--ink-soft);}
+
+  .intro{padding-block:64px;}
+  .quote{font-size:1.6rem; line-height:1.35; font-style:italic; font-weight:400; max-width:21ch; text-wrap:balance;}
+
+  .count{display:grid; grid-template-columns:repeat(4,1fr); gap:6px; width:100%;}
+  .count div{display:flex; flex-direction:column; align-items:center; padding:8px 2px;}
+  .count b{color:var(--head); font-size:2.5rem; font-weight:500; line-height:1; font-variant-numeric:tabular-nums lining-nums;}
+  .count span{font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft); margin-top:6px;}
+
+  .facts{display:flex; flex-direction:column; gap:14px; margin:2px 0 8px;}
+  .fact span{display:block; font-size:1.35rem; line-height:1.25;}
+
+  .btns{display:flex; flex-wrap:wrap; gap:10px; justify-content:center;}
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:var(--font); font-weight:600; font-size:.9rem;
+       letter-spacing:.16em; text-transform:uppercase; text-decoration:none; padding:12px 24px; border-radius:999px; cursor:pointer;
+       border:1px solid var(--head); background:var(--head); color:var(--on-ink);}
+  .btn.ghost{background:transparent; color:var(--head);}
+  .btn:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible,.chip:focus-visible,.fab:focus-visible,.copy:focus-visible{outline:2px solid var(--ink); outline-offset:2px;}
+
+  .dress{font-size:1.6rem; font-style:italic;}
+
+  /* Desplegables */
+  .acc{width:100%; display:flex; flex-direction:column; gap:10px; text-align:left;}
+  details{background:var(--card); border:1px solid var(--line); border-radius:var(--r);}
+  summary{list-style:none; cursor:pointer; padding:14px 16px; display:flex; align-items:center; gap:12px; font-size:1.1rem;}
+  summary::-webkit-details-marker{display:none;}
+  summary svg{width:24px; height:24px; flex:none; color:var(--ink);}
+  summary::after{content:"+"; margin-left:auto; font-size:1.4rem; line-height:1; transition:transform .2s;}
+  details[open] summary::after{transform:rotate(45deg);}
+  .dbody{padding:0 16px 16px 52px; color:var(--ink-soft); font-size:1.05rem; display:flex; flex-direction:column; gap:8px;}
+  .hgroup{font-size:.74rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink); margin-top:6px;}
+  .hotels{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:6px;}
+  .hotels a{color:var(--ink-soft); text-decoration:none; border-bottom:1px solid var(--line);}
+  .hotels a::after{content:" ↗"; font-size:.8em;}
+
+  /* Regalos */
+  .reveal{width:100%; display:flex; flex-direction:column; align-items:center; gap:12px;}
+  .alias-box{width:100%; padding:18px; background:var(--card); border:1px solid var(--line); border-radius:var(--r);
+             display:flex; flex-direction:column; align-items:center; gap:10px;}
+  .alias-box code{font-family:var(--font); font-size:1.4rem; font-weight:600; word-break:break-all; user-select:all;}
+  .copy{font-family:var(--font); font-weight:600; font-size:.85rem; letter-spacing:.14em; text-transform:uppercase; padding:8px 18px;
+        border-radius:999px; border:1px solid var(--head); background:transparent; color:var(--head); cursor:pointer;}
+
+  /* Confirmación */
+  .hello{font-size:1.5rem; font-style:italic;}
+  form{width:100%; display:flex; flex-direction:column; gap:16px; text-align:left;}
+  label.f{font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; display:block; margin-bottom:6px; color:var(--ink-soft);}
+  input[type=text],textarea{width:100%; font-family:var(--font); font-size:1.05rem; font-weight:500; color:var(--ink); background:var(--card);
+       border:1px solid var(--line); border-radius:var(--r); padding:10px 12px;}
+  input::placeholder,textarea::placeholder{color:var(--ink-soft); opacity:.6;}
+  textarea{min-height:70px; resize:vertical;}
+  fieldset{border:0; margin:0; padding:0;}
+  legend{padding:0; margin-bottom:6px; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft);}
+  .people{display:flex; flex-direction:column; gap:8px;}
+  .person{display:flex; align-items:center; gap:12px; padding:12px 14px; background:var(--card); border:1px solid var(--line);
+          border-radius:var(--r); font-size:1.1rem; cursor:pointer;}
+  .person input{width:20px; height:20px; accent-color:var(--head); margin:0;}
+  .person:has(input:checked){border-color:var(--head);}
+  .rbtns{display:flex; flex-direction:column; gap:10px;}
+  .rbtns .btn{width:100%;}
+  .note{font-size:.9rem; color:var(--ink-soft); text-align:center;}
+  .locked{padding:18px; border:1px dashed var(--line); border-radius:var(--r); background:var(--card); color:var(--ink-soft);}
+  .thanks{padding:20px; background:var(--card); border:1px solid var(--head); border-radius:var(--r); width:100%;}
+
+  /* Canción */
+  .player{width:100%; aspect-ratio:16/9; max-width:100%; border-radius:var(--r); overflow:hidden; background:var(--soft);
+          display:flex; align-items:center; justify-content:center; color:var(--ink-soft); font-size:.95rem; text-align:center; padding:12px;}
+  .player iframe{width:100%; height:100%; border:0;}
+
+  footer{padding:48px 24px 60px; text-align:center; color:var(--ink-soft); font-size:.85rem; letter-spacing:.24em;
+         display:flex; flex-direction:column; align-items:center; gap:6px;}
+  footer .sig{font-size:2.2rem; font-style:italic; letter-spacing:0; color:var(--head);}
+  .credit{font-size:.72rem; letter-spacing:.06em; opacity:.8; margin-top:6px;}
+
+  /* Música */
+  .fab{color:var(--head); position:fixed; z-index:20; top:calc(14px + env(safe-area-inset-top,0px)); right:max(14px, calc(50% - 230px + 14px));
+       width:42px; height:42px; border-radius:50%; border:0; background:rgba(255,255,255,.9); cursor:pointer;
+       display:flex; align-items:center; justify-content:center; box-shadow:0 2px 10px rgba(0,0,0,.16);}
+  .fab svg{width:18px; height:18px;}
+  .fab.on svg{animation:spin 4s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .gate{position:fixed; inset:0; z-index:30; display:flex; align-items:flex-end; justify-content:center; background:rgba(0,0,0,.3);}
+  .gate .card{width:100%; max-width:460px; background:var(--bg); color:var(--ink); padding:28px 24px calc(28px + env(safe-area-inset-bottom,0px));
+              border-radius:18px 18px 0 0; text-align:center; font-family:var(--font); font-size:1.2rem; display:flex; flex-direction:column; gap:12px; align-items:center;}
+  .gate .card svg{width:34px; height:34px;}
+  .gate .g2{background:transparent; color:var(--ink-soft); border:0; padding:6px; font-family:var(--font); font-size:1rem; cursor:pointer; text-decoration:underline;}
+
+  @media (prefers-reduced-motion:reduce){ *{transition:none!important; animation:none!important;} }
+</style>
+
+<!-- Íconos de línea (mismo trazo que la torta) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c0-9 6-15 16-16-1 10-7 16-16 16z"/><path d="M4 20l9-9"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16v-3l2-5h14l2 5v3z"/><path d="M3 13h18"/><circle cx="7" cy="16.5" r="1.8"/><circle cx="17" cy="16.5" r="1.8"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/><path d="M12 7v5l2.5 1.5"/></symbol>
+    <symbol id="i-bed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19V6M3 15h18v4M21 15v-3a3 3 0 0 0-3-3h-7v6"/><circle cx="7" cy="11" r="2"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></symbol>
+  </defs>
+</svg>
+
+</head>
+<body>
+<div class="wrap">
+<main class="inv" id="inv">
+
+  <header class="hero" id="hero" style="background-image:url(portada.jpg)">
+    <div class="veil" aria-hidden="true"></div>
+    <div class="hero-text">
+      <h1 class="names">Nacho y Mili</h1>
+      <p class="tagline">nos casamos</p>
+    </div>
+        <span class="scroll-hint" aria-hidden="true"></span>
+  </header>
+
+  <section class="intro s-tint">
+    <svg class="ill sm" viewBox="0 0 80 44" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+      <circle cx="31" cy="24" r="14"/><circle cx="49" cy="24" r="14"/>
+      <path d="M46 7 l3 -4 l3 4 l-3 3z" fill="currentColor" fill-opacity=".2" stroke-linejoin="round"/>
+    </svg>
+    <p class="quote">Elegimos compartir este día con quienes hacen nuestra historia. Te esperamos.</p>
+  </section>
+
+  <section class="s-deep">
+    <svg class="ill sm" viewBox="0 0 48 60" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M8 4h32M8 56h32"/>
+      <path d="M12 4c0 14 12 18 12 26S12 42 12 56M36 4c0 14-12 18-12 26s12 12 12 26"/>
+      <path d="M16 50c3-4 13-4 16 0" fill="currentColor" fill-opacity=".2"/>
+      <path d="M18 14h12" /><path d="M24 30v10" stroke-dasharray="1.5 3"/>
+    </svg>
+    <h2>Falta poco…</h2>
+    <div class="count" role="timer" aria-label="Cuenta regresiva">
+      <div><b id="cd-d">—</b><span>días</span></div>
+      <div><b id="cd-h">—</b><span>horas</span></div>
+      <div><b id="cd-m">—</b><span>min</span></div>
+      <div><b id="cd-s">—</b><span>seg</span></div>
+    </div>
+  </section>
+
+  <section id="fiesta">
+    <svg class="ill" viewBox="0 0 120 110" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M60 6 v10"/><path d="M60 6 c-3 3 -3 6 0 7 c3 -1 3 -4 0 -7z" fill="currentColor" fill-opacity=".25"/>
+      <path d="M52 19 c0 -3 16 -3 16 0"/>
+      <rect x="40" y="20" width="40" height="22" rx="3"/>
+      <path d="M40 30 c5 4 10 4 13 0 c3 4 10 4 14 0 c3 4 9 4 13 0"/>
+      <rect x="28" y="42" width="64" height="26" rx="3"/>
+      <path d="M28 54 c6 4 12 4 16 0 c4 4 12 4 16 0 c4 4 12 4 16 0 c4 4 10 4 16 0"/>
+      <rect x="16" y="68" width="88" height="30" rx="3"/>
+      <path d="M16 82 c7 5 14 5 18 0 c4 5 14 5 18 0 c4 5 14 5 18 0 c4 5 14 5 18 0 c4 5 10 5 14 0"/>
+      <path d="M8 104 h104"/>
+      <circle cx="60" cy="31" r="1.5" fill="currentColor"/><circle cx="46" cy="61" r="1.5" fill="currentColor"/><circle cx="74" cy="61" r="1.5" fill="currentColor"/>
+    </svg>
+    <h2>La fiesta</h2>
+    <div class="facts">
+      <div class="fact"><p class="label">Fecha</p><span>Sábado 27 de marzo de 2027</span></div>
+      <div class="fact"><p class="label">Recepción</p><span>14:00 hs</span></div>
+      <div class="fact"><p class="label">Ceremonia civil</p><span>15:00 hs</span></div>
+      <div class="fact"><p class="label">Lugar</p><span>Buena Vista, Salta</span></div>
+    </div>
+    <div class="btns">
+      <a class="btn" href="https://maps.app.goo.gl/t93KvMgsjt9VQDAX9" target="_blank" rel="noopener">Cómo llegar</a>
+      <a class="btn ghost" target="_blank" rel="noopener"
+         href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Casamiento%20Nacho%20y%20Mili&dates=20270327T170000Z/20270328T060000Z&location=Buena%20Vista%2C%20Salta&details=https%3A%2F%2Fmaps.app.goo.gl%2Ft93KvMgsjt9VQDAX9">Agendar</a>
+    </div>
+  </section>
+
+  <section class="s-tint">
+    <svg class="ill" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <!-- vestido -->
+      <path d="M30 8v8M44 8v8"/><path d="M30 16c2 4 12 4 14 0l2 16H28z"/>
+      <path d="M28 32c-4 18-10 34-14 48h46c-4-14-10-30-14-48"/>
+      <path d="M22 60c6 3 24 3 30 0" />
+      <!-- traje -->
+      <path d="M78 10l10 6 10-6"/><path d="M78 10l-8 6v64h36V16l-8-6"/>
+      <path d="M88 16l-6 18 6 46 6-46z"/><path d="M85 18l3 4 3-4" fill="currentColor" fill-opacity=".25"/>
+      <path d="M70 16l-6 34M106 16l6 34"/>
+    </svg>
+    <h2>Dress code</h2>
+    <p class="dress">Elegante sport</p>
+  </section>
+
+  <section id="info">
+    <svg class="ill sm" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="30" cy="30" r="24"/><path d="M30 26v16"/><circle cx="30" cy="19" r="1.6" fill="currentColor"/>
+    </svg>
+    <h2>Info útil</h2>
+    <div class="acc">
+      <details><summary><svg aria-hidden="true"><use href="#i-sun"/></svg>Es de tarde</summary>
+        <div class="dbody"><p>Llevá ropa cómoda y anteojos de sol.</p></div></details>
+      <details><summary><svg aria-hidden="true"><use href="#i-leaf"/></svg>Al aire libre</summary>
+        <div class="dbody"><p>La ceremonia y la recepción son al aire libre, así que te recomendamos no usar taco aguja.</p></div></details>
+      <details><summary><svg aria-hidden="true"><use href="#i-car"/></svg>Estacionamiento</summary>
+        <div class="dbody"><p>Hay estacionamiento en el predio de Buena Vista.</p></div></details>
+      <details><summary><svg aria-hidden="true"><use href="#i-phone"/></svg>Traslados</summary>
+        <div class="dbody"><p>En Salta funciona muy bien Uber: andá tranquilo y disfrutá la fiesta al máximo.</p></div></details>
+      <details><summary><svg aria-hidden="true"><use href="#i-bed"/></svg>Alojamiento</summary>
+        <div class="dbody">
+          <p>Si venís de afuera, algunas opciones:</p>
+          <p class="hgroup">Salta capital</p>
+          <ul class="hotels" data-city="Salta">
+            <li>Sheraton Salta Hotel</li><li>Hotel Alejandro I</li><li>Legado Mítico</li><li>Kkala Boutique Hotel</li>
+            <li>Design Suites Salta</li><li>Hotel Solar de la Plaza</li><li>Casa Real Hotel</li><li>Hotel Almería</li><li>Ayres de Salta Hotel</li><li>Hotel Salta</li>
+          </ul>
+          <p class="hgroup">San Lorenzo</p>
+          <ul class="hotels" data-city="San Lorenzo Salta">
+            <li>Hotel Las Moras</li><li>Posada de los Poetas</li><li>B&amp;B Casa Hernández</li><li>Hotel Selva Montana</li><li>Don Numas Posada &amp; Spa</li><li>El Castillo de San Lorenzo</li>
+          </ul>
+        </div></details>
+    </div>
+  </section>
+
+  <section id="regalos" class="s-deep">
+    <svg class="ill" viewBox="0 0 100 90" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="16" y="38" width="68" height="46" rx="3"/>
+      <rect x="10" y="26" width="80" height="14" rx="3"/>
+      <path d="M50 26v58"/>
+      <path d="M50 26c-6-12-24-18-24-8 0 6 12 8 24 8z" fill="currentColor" fill-opacity=".15"/>
+      <path d="M50 26c6-12 24-18 24-8 0 6-12 8-24 8z" fill="currentColor" fill-opacity=".15"/>    </svg>
+    <h2>Regalos</h2>
+    <p class="soft">El mejor regalo es que estés con nosotros. Y si además querés, podés hacernos un regalo por acá:</p>
+    <div class="reveal">
+      <button class="btn ghost" type="button" id="show-alias" aria-expanded="false" aria-controls="alias-box">Hacer un regalo</button>
+      <div class="alias-box" id="alias-box" hidden>
+        <p class="label">Alias · banco o Mercado Pago</p>
+        <code id="alias">Nacho.casta.gal</code>
+        <button class="copy" type="button" id="copy">Copiar</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="rsvp s-tint" id="rsvp">
+    <svg class="ill" viewBox="0 0 100 70" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="8" y="8" width="84" height="54" rx="3"/>
+      <path d="M8 12l42 30 42-30"/>
+      <path d="M50 30c-3-4-9-2-7 3 1 3 7 7 7 7s6-4 7-7c2-5-4-7-7-3z" fill="currentColor" fill-opacity=".25"/>
+    </svg>
+    <h2>Confirmá tu asistencia</h2>
+    <p class="soft">Antes del 1 de marzo de 2027</p>
+
+    <div class="locked" id="locked">Para confirmar, usá el link personal que te mandamos por WhatsApp.</div>
+
+    <div id="open" hidden style="width:100%;display:flex;flex-direction:column;gap:12px">
+      <p class="hello" id="hello"></p>
+      <p class="soft" id="cupo-txt"></p>
+      <form id="rsvp-form" novalidate>
+        <fieldset id="cant-wrap">
+          <legend>Tildá quiénes van</legend>
+          <div class="people" id="people"></div>
+        </fieldset>
+        <div>
+          <label class="f" for="f-dieta">Restricciones alimentarias</label>
+          <input type="text" id="f-dieta" name="dieta" placeholder="Ej.: 1 celíaco, 1 vegetariano">
+        </div>
+        <div>
+          <label class="f" for="f-tema">Un tema que no puede faltar</label>
+          <input type="text" id="f-tema" name="tema" placeholder="Artista – canción">
+        </div>
+        <div>
+          <label class="f" for="f-msj">Mensaje para los novios</label>
+          <textarea id="f-msj" name="mensaje"></textarea>
+        </div>
+        <div class="rbtns">
+          <button class="btn" type="submit" value="si">Confirmo asistencia</button>
+          <button class="btn ghost" type="submit" value="no" id="btn-no">No puedo ir</button>
+        </div>
+        <p class="note" id="f-err" hidden>Tildá al menos una persona, o tocá “No podemos ir”.</p>
+        <p class="note">Tus datos solo los usamos para organizar la fiesta.</p>
+      </form>
+      <div class="thanks" id="thanks" hidden><p class="hello" id="thanks-t"></p><p class="soft" id="thanks-b"></p></div>
+    </div>
+  </section>
+
+  <section id="cancion">
+    <svg class="ill sm" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+      <circle cx="30" cy="30" r="25"/><circle cx="30" cy="30" r="18" stroke-dasharray="1 3"/><circle cx="30" cy="30" r="8"/><circle cx="30" cy="30" r="1.8" fill="currentColor"/>
+    </svg>
+    <h2>Nuestra canción</h2>
+    <div class="player" id="player">El video de YouTube aparece en la versión publicada</div>
+  </section>
+
+  <footer class="s-deep">
+    <span class="sig">Nacho y Mili</span>
+    <span>27 · 03 · 2027</span>
+    <span class="credit">“Onliyu” · Gauchito Club ft. Axel Fiks</span>
+  </footer>
+</main>
+</div>
+
+<button class="fab" id="fab" type="button" aria-label="Activar música" aria-pressed="false">
+  <svg aria-hidden="true"><use href="#i-note"/></svg>
+</button>
+
+<div class="gate" id="gate">
+  <div class="card">
+    <svg aria-hidden="true"><use href="#i-note"/></svg>
+    <p>Activá el sonido para vivirla completa</p>
+    <button class="btn" type="button" id="g-on">Activar música</button>
+    <button class="g2" type="button" id="g-off">Seguir sin música</button>
+  </div>
+</div>
+
+
+
+<script>
+(function(){
+  /* ===== Configuración de la versión final ===== */
+  var API = "https://script.google.com/macros/s/AKfycby3SoEoF5K3Wnh52K2MqiSoSlLp-2CZkmtOWRs_KSz0sJZJQL1HLe605Om0peMMleeL3Q/exec";  // URL del Apps Script (/exec): GET ?i=CODIGO devuelve {nombre,integrantes}; POST guarda la respuesta
+  var YT_ID = "Jq9LG6ypJMU"; // Gauchito Club – Onliyu ft. Axel Fiks (video oficial)
+  var EVENT = new Date("2027-03-27T14:00:00-03:00").getTime();
+  var DEMO = {};
+  var $ = function(id){ return document.getElementById(id); };
+
+  document.documentElement.dataset.tpl = "terracota";
+
+  /* Hoteles: link a Google Maps */
+  document.querySelectorAll(".hotels").forEach(function(ul){
+    ul.querySelectorAll("li").forEach(function(li){
+      var name = li.textContent, a = document.createElement("a");
+      a.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(name + " " + ul.dataset.city);
+      a.target = "_blank"; a.rel = "noopener"; a.textContent = name;
+      li.textContent = ""; li.appendChild(a);
+    });
+  });
+
+  /* Cuenta regresiva */
+  function pad(n){ return String(n).padStart(2,"0"); }
+  function tick(){
+    var s = Math.floor(Math.max(0, EVENT - Date.now())/1000);
+    $("cd-d").textContent = Math.floor(s/86400);
+    $("cd-h").textContent = pad(Math.floor(s%86400/3600));
+    $("cd-m").textContent = pad(Math.floor(s%3600/60));
+    $("cd-s").textContent = pad(s%60);
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* Música: YouTube en la versión publicada; si YouTube no carga (como en esta vista previa), suena un Canon sintetizado */
+  var on=false, yt=null, ytReady=false;
+  function syncFab(){ var f=$("fab"); f.classList.toggle("on",on); f.setAttribute("aria-pressed",on); f.setAttribute("aria-label", on?"Pausar música":"Activar música"); }
+  var ctx=null, master=null, next=0, step=0, sched=null;
+  var BASS=[50,45,47,42,43,38,43,45], ARP=[[62,66,69],[61,64,69],[62,66,71],[61,66,69],[62,67,71],[62,66,69],[62,67,71],[61,64,69]];
+  var MEL=[[78,76,74,73,71,69,71,73],[74,73,71,69,67,66,67,64]], BAR=2.0;
+  function hz(m){ return 440*Math.pow(2,(m-69)/12); }
+  function note(m,t,dur,vol){
+    [[1,"sine",1],[2,"sine",.25],[3,"triangle",.08]].forEach(function(p){
+      var o=ctx.createOscillator(), g=ctx.createGain(); o.type=p[1]; o.frequency.value=hz(m)*p[0];
+      g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(vol*p[2],t+0.008); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+      o.connect(g); g.connect(master); o.start(t); o.stop(t+dur+0.05);
+    });
+  }
+  function initAudio(){
+    ctx=new (window.AudioContext||window.webkitAudioContext)(); master=ctx.createGain(); master.gain.value=0.5;
+    var dry=ctx.createGain(); dry.gain.value=0.8; var wet=ctx.createGain(); wet.gain.value=0.35;
+    var rev=ctx.createConvolver(), len=ctx.sampleRate*2.8, buf=ctx.createBuffer(2,len,ctx.sampleRate);
+    for(var c=0;c<2;c++){ var d=buf.getChannelData(c); for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3); }
+    rev.buffer=buf; master.connect(dry); dry.connect(ctx.destination); master.connect(rev); rev.connect(wet); wet.connect(ctx.destination);
+  }
+  function schedule(){
+    while(next < ctx.currentTime + 1.2){
+      var i=step%8, pass=Math.floor(step/8)%3, t=next;
+      note(BASS[i], t, 3.2, .22); if(pass>0) note(MEL[pass-1][i], t, 2.6, .16);
+      var a=ARP[i]; [a[0],a[1],a[2],a[1]].forEach(function(m,k){ note(m, t+k*BAR/4, 1.4, .07); });
+      next += BAR; step++;
+    }
+  }
+  if(YT_ID){
+    window.onYouTubeIframeAPIReady = function(){
+      $("player").textContent = ""; var h=document.createElement("div"); h.id="yt"; $("player").appendChild(h);
+      yt = new YT.Player("yt", { videoId:YT_ID, playerVars:{ loop:1, playlist:YT_ID, playsinline:1, rel:0 },
+        events:{ onReady:function(){ ytReady=true; if(on) yt.playVideo(); },
+                 onStateChange:function(ev){ if(ev.data===1 && !on){ on=true; syncFab(); } if(ev.data===2 && on){ on=false; syncFab(); } } } });
+    };
+    var s=document.createElement("script"); s.src="https://www.youtube.com/iframe_api";
+    s.onerror=function(){ YT_ID=""; if(on) setMusic(true); };
+    document.head.appendChild(s);
+  }
+  function setMusic(v){
+    on=v; syncFab();
+    if(YT_ID){ if(yt && ytReady){ if(on) yt.playVideo(); else yt.pauseVideo(); } return; }
+    try{
+      if(on){ if(!ctx) initAudio(); ctx.resume(); next=ctx.currentTime+0.1; clearInterval(sched); schedule(); sched=setInterval(schedule,250); }
+      else { clearInterval(sched); if(ctx) ctx.suspend(); }
+    }catch(e){}
+  }
+  $("fab").addEventListener("click", function(){ setMusic(!on); });
+  $("g-on").addEventListener("click", function(){ $("gate").hidden=true; setMusic(true); });
+  $("g-off").addEventListener("click", function(){ $("gate").hidden=true; });
+
+  /* Regalos: datos ocultos hasta tocar el botón */
+  $("show-alias").addEventListener("click", function(){
+    var box=$("alias-box"), open=box.hidden; box.hidden=!open;
+    this.setAttribute("aria-expanded", open); this.textContent = open ? "Ocultar" : "Hacer un regalo";
+  });
+  var cb=$("copy");
+  cb.addEventListener("click", function(){
+    var el=$("alias");
+    function done(){ cb.textContent="Copiado"; setTimeout(function(){ cb.textContent="Copiar"; },1800); }
+    function fallback(){ var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r); cb.textContent="Seleccionado"; }
+    try{ navigator.clipboard.writeText(el.textContent).then(done, fallback); }catch(err){ fallback(); }
+  });
+
+  /* Invitación personal */
+  function codeFromUrl(){ var q=new URLSearchParams(location.search).get("i"); return q || (location.hash ? location.hash.slice(1) : ""); }
+  function showInvite(code){
+    function render(d){
+      $("locked").hidden = !!d; $("open").hidden = !d;
+      if(!d) return;
+      $("hello").textContent = "¡Hola, " + d.nombre + "!";
+      var list=d.integrantes||[], many=list.length>1;
+      $("cupo-txt").textContent = many ? "Esta invitación es para " + list.length + " personas." : "Esta invitación es personal.";
+      var box=$("people"); box.innerHTML="";
+      list.forEach(function(name,i){
+        var l=document.createElement("label"); l.className="person";
+        var c=document.createElement("input"); c.type="checkbox"; c.id="p-"+i; c.value=name; c.checked=true;
+        l.appendChild(c); l.appendChild(document.createTextNode(name)); box.appendChild(l);
+      });
+      $("cant-wrap").hidden=!many;
+      $("btn-no").textContent = many ? "No podemos ir" : "No puedo ir";
+      $("f-err").hidden=true; $("rsvp-form").hidden=false; $("thanks").hidden=true;
+      $("rsvp-form").dataset.code=code; $("rsvp-form").dataset.many = many ? "1" : "";
+    }
+    if(API && code){ fetch(API+"?i="+encodeURIComponent(code)).then(function(r){return r.json();}).then(function(d){ render(d && d.nombre ? d : null); }).catch(function(){ render(null); }); }
+    else render(DEMO[code] || null);
+  }
+  var initial=codeFromUrl();
+  showInvite(initial);
+
+  var form=$("rsvp-form");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var asiste=(e.submitter && e.submitter.value) || "si";
+    var van = asiste==="si" ? Array.prototype.map.call(document.querySelectorAll("#people input:checked"), function(c){ return c.value; }) : [];
+    if(asiste==="si" && !van.length){ $("f-err").hidden=false; return; }
+    var data={ codigo:form.dataset.code, asiste:asiste, van:van, dieta:$("f-dieta").value.trim(), tema:$("f-tema").value.trim(), mensaje:$("f-msj").value.trim() };
+    if(API){ try{ fetch(API,{method:"POST", mode:"no-cors", body:JSON.stringify(data)}); }catch(err){} }
+    var many=!!form.dataset.many;
+    $("thanks-t").textContent = asiste==="si" ? (many ? "¡Gracias! Los esperamos." : "¡Gracias! Te esperamos.") : "Gracias por avisarnos.";
+    $("thanks-b").textContent = asiste==="si" ? (many ? "Confirmaron: " + van.join(", ") + "." : "Tu lugar está confirmado.") : (many ? "Los vamos a extrañar." : "Te vamos a extrañar.");
+    form.hidden=true; $("thanks").hidden=false;
+  });
+})();
+</script>
+
+</body>
+</html>
