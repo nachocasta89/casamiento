@@ -140,6 +140,13 @@
           border-radius:var(--r); font-size:1.1rem; cursor:pointer;}
   .person input{width:20px; height:20px; accent-color:var(--head); margin:0;}
   .person:has(input:checked){border-color:var(--head);}
+  .prow{display:flex; flex-direction:column; gap:6px;}
+  .diet{display:flex; flex-direction:column; gap:6px; padding-left:46px;}
+  .diet select,.diet input{width:100%; font-family:var(--font); font-size:1rem; font-weight:500; color:var(--ink); background:var(--card);
+       border:1px solid var(--line); border-radius:var(--r); padding:8px 10px;}
+  .diet select:focus-visible{outline:2px solid var(--head); outline-offset:2px;}
+  .diet small{font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft);}
+  .single .person{display:none;} .single .diet{padding-left:0;}
   .rbtns{display:flex; flex-direction:column; gap:10px;}
   .rbtns .btn{width:100%;}
   .note{font-size:.9rem; color:var(--ink-soft); text-align:center;}
@@ -285,10 +292,15 @@
           <ul class="hotels" data-city="Salta">
             <li>Sheraton Salta Hotel</li><li>Hotel Alejandro I</li><li>Legado Mítico</li><li>Kkala Boutique Hotel</li>
             <li>Design Suites Salta</li><li>Hotel Solar de la Plaza</li><li>Casa Real Hotel</li><li>Hotel Almería</li><li>Ayres de Salta Hotel</li><li>Hotel Salta</li>
+            <li data-url="https://www.hotelcaseros.com/">Hotel Caseros</li><li data-url="https://www.balcondelaplaza.com.ar/">Balcón de la Plaza</li>
           </ul>
           <p class="hgroup">San Lorenzo</p>
           <ul class="hotels" data-city="San Lorenzo Salta">
             <li>Hotel Las Moras</li><li>Posada de los Poetas</li><li>B&amp;B Casa Hernández</li><li>Hotel Selva Montana</li><li>Don Numas Posada &amp; Spa</li><li>El Castillo de San Lorenzo</li>
+          </ul>
+          <p class="hgroup">Castellanos</p>
+          <ul class="hotels" data-city="Castellanos Salta">
+            <li>Rincón del Cerro</li><li>Macedonia</li>
           </ul>
         </div></details>
     </div>
@@ -329,13 +341,9 @@
       <p class="soft" id="cupo-txt"></p>
       <form id="rsvp-form" novalidate>
         <fieldset id="cant-wrap">
-          <legend>Tildá quiénes van</legend>
+          <legend id="people-lbl">Tildá quiénes van</legend>
           <div class="people" id="people"></div>
         </fieldset>
-        <div>
-          <label class="f" for="f-dieta">Restricciones alimentarias</label>
-          <input type="text" id="f-dieta" name="dieta" placeholder="Ej.: 1 celíaco, 1 vegetariano">
-        </div>
         <div>
           <label class="f" for="f-tema">Un tema que no puede faltar</label>
           <input type="text" id="f-tema" name="tema" placeholder="Artista – canción">
@@ -401,7 +409,7 @@
   document.querySelectorAll(".hotels").forEach(function(ul){
     ul.querySelectorAll("li").forEach(function(li){
       var name = li.textContent, a = document.createElement("a");
-      a.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(name + " " + ul.dataset.city);
+      a.href = li.dataset.url || ("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(name + " " + ul.dataset.city));
       a.target = "_blank"; a.rel = "noopener"; a.textContent = name;
       li.textContent = ""; li.appendChild(a);
     });
@@ -492,13 +500,25 @@
       $("hello").textContent = "¡Hola, " + d.nombre + "!";
       var list=d.integrantes||[], many=list.length>1;
       $("cupo-txt").textContent = many ? "Esta invitación es para " + list.length + " personas." : "Esta invitación es personal.";
-      var box=$("people"); box.innerHTML="";
+      var box=$("people"); box.innerHTML=""; box.className = many ? "people" : "people single";
+      $("people-lbl").textContent = many ? "Tildá quiénes van" : "Restricción alimentaria";
+      var DIETS=["Sin restricciones","Vegetariano","Vegano","Celíaco (sin TACC)","Otra"];
       list.forEach(function(name,i){
+        var row=document.createElement("div"); row.className="prow";
         var l=document.createElement("label"); l.className="person";
         var c=document.createElement("input"); c.type="checkbox"; c.id="p-"+i; c.value=name; c.checked=true;
-        l.appendChild(c); l.appendChild(document.createTextNode(name)); box.appendChild(l);
+        l.appendChild(c); l.appendChild(document.createTextNode(name)); row.appendChild(l);
+        var dv=document.createElement("div"); dv.className="diet";
+        if(many){ var sm=document.createElement("small"); sm.textContent="Restricción alimentaria"; dv.appendChild(sm); }
+        var sel=document.createElement("select"); sel.id="d-"+i; sel.setAttribute("aria-label","Restricción alimentaria de "+name);
+        DIETS.forEach(function(o){ var op=document.createElement("option"); op.textContent=o; sel.appendChild(op); });
+        var other=document.createElement("input"); other.type="text"; other.id="o-"+i; other.placeholder="¿Cuál?"; other.hidden=true;
+        other.setAttribute("aria-label","Otra restricción de "+name);
+        sel.addEventListener("change", function(){ other.hidden = sel.value!=="Otra"; if(!other.hidden) other.focus(); });
+        c.addEventListener("change", function(){ dv.hidden = !c.checked; });
+        dv.appendChild(sel); dv.appendChild(other); row.appendChild(dv); box.appendChild(row);
       });
-      $("cant-wrap").hidden=!many;
+      $("cant-wrap").hidden=false;
       $("btn-no").textContent = many ? "No podemos ir" : "No puedo ir";
       $("f-err").hidden=true; $("rsvp-form").hidden=false; $("thanks").hidden=true;
       $("rsvp-form").dataset.code=code; $("rsvp-form").dataset.many = many ? "1" : "";
@@ -513,9 +533,17 @@
   form.addEventListener("submit", function(e){
     e.preventDefault();
     var asiste=(e.submitter && e.submitter.value) || "si";
-    var van = asiste==="si" ? Array.prototype.map.call(document.querySelectorAll("#people input:checked"), function(c){ return c.value; }) : [];
+    var van=[], dietas={};
+    if(asiste==="si") document.querySelectorAll("#people .prow").forEach(function(row){
+      var c=row.querySelector("input[type=checkbox]"); if(!c.checked) return;
+      van.push(c.value);
+      var sel=row.querySelector("select"), o=row.querySelector("input[type=text]"), d=sel.value;
+      if(d==="Otra") d = o.value.trim() ? "Otra: " + o.value.trim() : "Otra";
+      if(d!=="Sin restricciones") dietas[c.value]=d;
+    });
     if(asiste==="si" && !van.length){ $("f-err").hidden=false; return; }
-    var data={ codigo:form.dataset.code, asiste:asiste, van:van, dieta:$("f-dieta").value.trim(), tema:$("f-tema").value.trim(), mensaje:$("f-msj").value.trim() };
+    var resumen=Object.keys(dietas).map(function(n){ return n + ": " + dietas[n]; }).join("; ");
+    var data={ codigo:form.dataset.code, asiste:asiste, van:van, dietas:dietas, dieta:resumen, tema:$("f-tema").value.trim(), mensaje:$("f-msj").value.trim() };
     if(API){ try{ fetch(API,{method:"POST", mode:"no-cors", body:JSON.stringify(data)}); }catch(err){} }
     var many=!!form.dataset.many;
     $("thanks-t").textContent = asiste==="si" ? (many ? "¡Gracias! Los esperamos." : "¡Gracias! Te esperamos.") : "Gracias por avisarnos.";
