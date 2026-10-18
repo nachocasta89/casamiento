@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" data-tpl="jardin">
+<html lang="es" data-tpl="dos">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -11,13 +11,13 @@
 <meta property="og:image" content="https://nachocasta89.github.io/casamiento/og.jpg">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:url" content="https://nachocasta89.github.io/casamiento/">
-<meta name="theme-color" content="#544E61">
+<meta name="theme-color" content="#2F4632">
 <meta name="robots" content="noindex">
 <style>html{-webkit-text-size-adjust:100%} body{margin:0} img{max-width:100%}</style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Gluten:wght@500;600;700&family=Jost:wght@400;500;600&display=swap">
 <style>
   /* Una sola tipografía y un solo color de texto por plantilla. Cada plantilla es un mundo propio: no sigue el tema claro/oscuro del visor. */
   /* --ink: texto · --head: títulos y botones · --deep: franjas oscuras · --on-deep: texto sobre franjas · --accent2: detalles sobre franjas */
@@ -207,6 +207,57 @@
   .gate .card svg{width:34px; height:34px;}
   .gate .g2{background:transparent; color:var(--ink-soft); border:0; padding:6px; font-family:var(--font); font-size:1rem; cursor:pointer; text-decoration:underline;}
 
+
+
+  /* ---------- Plantilla "naranja": naranja + negro + verde, minimalista ---------- */
+  :root[data-tpl="naranja"]{
+    --bg:#F7F3EC; --ink:#1C1C1A; --ink-soft:#5A574F; --head:#E25E17; --line:#E3DCCF; --soft:#E8E9D6; --card:#FFFFFF; --outer:#E9E2D6; --on-ink:#1C1C1A;
+    --deep:#E25E17; --on-deep:#1C1C1A; --accent2:#1C1C1A; --ill:#1C1C1A; --fail:#C2410C;
+    --font:"Jost", "Helvetica Neue", Arial, sans-serif; --display:"Gluten", "Jost", sans-serif; --r:4px;
+  }
+  :root:is([data-tpl="naranja"],[data-tpl="dos"]) .inv{font-size:16px; font-weight:400; line-height:1.6;}
+  :root:is([data-tpl="naranja"],[data-tpl="dos"]) .names,
+  :root:is([data-tpl="naranja"],[data-tpl="dos"]) h2,
+  :root:is([data-tpl="naranja"],[data-tpl="dos"]) footer .sig,
+  :root:is([data-tpl="naranja"],[data-tpl="dos"]) .quiz .q,
+  :root:is([data-tpl="naranja"],[data-tpl="dos"]) .count b,
+  :root:is([data-tpl="naranja"],[data-tpl="dos"]) .hello{font-family:var(--display); font-style:normal; font-weight:600; letter-spacing:.01em;}
+  :root:is([data-tpl="naranja"],[data-tpl="dos"]) .names{text-transform:uppercase; font-size:clamp(3rem,15vw,4.4rem); line-height:.95;}
+  :root:is([data-tpl="naranja"],[data-tpl="dos"]) h2{font-size:2rem; text-transform:uppercase;}
+  :root:is([data-tpl="naranja"],[data-tpl="dos"]) .quiz .q{font-size:1.9rem;}
+  :root:is([data-tpl="naranja"],[data-tpl="dos"]) .count b{font-size:2.6rem; font-weight:700;}
+  :root:is([data-tpl="naranja"],[data-tpl="dos"]) .quote{font-style:normal; font-size:1.25rem; font-weight:400; line-height:1.5; max-width:26ch;}
+  :root:is([data-tpl="naranja"],[data-tpl="dos"]) .dress, :root:is([data-tpl="naranja"],[data-tpl="dos"]) .fact span{font-style:normal; font-size:1.15rem; font-weight:500;}
+  :root:is([data-tpl="naranja"],[data-tpl="dos"]) .hello{font-size:1.4rem;}
+  :root:is([data-tpl="naranja"],[data-tpl="dos"]) .label, :root:is([data-tpl="naranja"],[data-tpl="dos"]) .tagline, :root:is([data-tpl="naranja"],[data-tpl="dos"]) .quiz .big{letter-spacing:.28em; font-weight:500;}
+  :root:is([data-tpl="naranja"],[data-tpl="dos"]) .btn{border-radius:var(--r); font-weight:600; letter-spacing:.2em;}
+  :root[data-tpl="naranja"] .s-olive{background:#8A9360; --ink:#1C1C1A; --ink-soft:#26261F; --head:#1C1C1A; --ill:#1C1C1A;}
+  :root[data-tpl="naranja"] .s-green{--deep:#26352B; --on-deep:#F3EEE3; --accent2:#A3AE72; --on-ink:#26352B;}
+  :root[data-tpl="naranja"] section.s-olive + section{border-top-color:transparent;}
+
+
+  /* ---------- Plantilla "dos": primera parte en verdes, segunda en naranjas suaves ---------- */
+  :root[data-tpl="dos"]{
+    --font:"Jost", "Helvetica Neue", Arial, sans-serif; --display:"Gluten", "Jost", sans-serif; --r:4px; --fail:#B4532A;
+    --bg:#EEF0E3; --ink:#1F2A22; --ink-soft:#4E5A4F; --head:#3F5A3C; --line:#D3DAC6; --soft:#E1E6D2; --card:#F6F4EA; --outer:#E2E6D9; --on-ink:#F4F1E6;
+    --deep:#2F4632; --on-deep:#EEF1E6; --accent2:#B5C29A; --ill:#3F5A3C;
+  }
+  :root[data-tpl="dos"] .p2{
+    --bg:#F6ECE0; --ink:#2A211C; --ink-soft:#5E4D42; --head:#C2612D; --line:#E6D2C0; --soft:#EFDCCB; --card:#FBF4EA; --on-ink:#FBF4EA;
+    --deep:#CF7442; --on-deep:#22180F; --accent2:#22180F; --ill:#2A211C;
+  }
+  .part{background:var(--bg); color:var(--ink);}
+  :root[data-tpl="dos"] .hero-text{color:#F4EFE3;}
+  :root[data-tpl="dos"] .fab{background:rgba(246,244,234,.92);}
+  .cont{padding:8px 28px 56px; display:flex; flex-direction:column; align-items:center; gap:14px;}
+  .cont-arrow{width:14px; height:14px; border-right:1.5px solid var(--head); border-bottom:1.5px solid var(--head); transform:rotate(45deg); animation:bob 2.2s ease-in-out infinite;}
+  .p2.p2-in{animation:qin .5s ease both;}
+  .strip{background:var(--deep); color:var(--on-deep); display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
+         gap:6px 14px; padding:calc(16px + env(safe-area-inset-top,0px)) 64px 16px 20px; font-size:.78rem; letter-spacing:.18em; text-transform:uppercase;}
+  .strip a, .strip button{color:var(--on-deep); font:inherit; letter-spacing:inherit; text-transform:inherit; background:none; border:0; padding:4px 0;
+         text-decoration:underline; text-underline-offset:3px; cursor:pointer;}
+  .strip a:focus-visible, .strip button:focus-visible{outline:2px solid var(--on-deep); outline-offset:2px;}
+
   @media (prefers-reduced-motion:reduce){ *{transition:none!important; animation:none!important;} }
 </style>
 
@@ -227,6 +278,13 @@
 <div class="wrap">
 <main class="inv" id="inv">
 
+  <div class="part p1">
+  <div class="strip" id="strip" hidden>
+    <span>Sáb 27.03.27</span><span>14 hs</span><span>Buena Vista, Salta</span>
+    <a href="https://maps.app.goo.gl/t93KvMgsjt9VQDAX9" target="_blank" rel="noopener">Cómo llegar</a>
+    <button type="button" id="strip-more">Ver todo</button>
+  </div>
+  <div id="p1-full">
   <header class="hero" id="hero" style="background-image:url(portada.jpg)">
     <div class="veil" aria-hidden="true"></div>
     <div class="hero-text">
@@ -236,7 +294,7 @@
         <span class="scroll-hint" aria-hidden="true"></span>
   </header>
 
-  <section class="intro s-tint">
+  <section class="intro s-tint s-olive">
     <svg class="ill sm" viewBox="0 0 80 44" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
       <circle cx="31" cy="24" r="14"/><circle cx="49" cy="24" r="14"/>
       <path d="M46 7 l3 -4 l3 4 l-3 3z" fill="currentColor" fill-opacity=".2" stroke-linejoin="round"/>
@@ -286,7 +344,14 @@
          href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Casamiento%20Nacho%20y%20Mili&dates=20270327T170000Z/20270328T060000Z&location=Buena%20Vista%2C%20Salta&details=https%3A%2F%2Fmaps.app.goo.gl%2Ft93KvMgsjt9VQDAX9">Agendar</a>
     </div>
   </section>
+    <div class="cont">
+      <button class="btn" type="button" id="cont-btn" aria-controls="part2" aria-expanded="false">Continuar</button>
+      <span class="cont-arrow" aria-hidden="true"></span>
+    </div>
+  </div>
+  </div>
 
+  <div class="part p2" id="part2" hidden>
   <section class="s-tint">
     <svg class="ill" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <!-- vestido -->
@@ -337,7 +402,7 @@
     </div>
   </section>
 
-  <section id="regalos" class="s-deep">
+  <section id="regalos" class="s-deep s-green">
     <svg class="ill" viewBox="0 0 100 90" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <rect x="16" y="38" width="68" height="46" rx="3"/>
       <rect x="10" y="26" width="80" height="14" rx="3"/>
@@ -408,6 +473,7 @@
     <span>27 · 03 · 2027</span>
     <span class="credit">“Onliyu” · Gauchito Club ft. Axel Fiks</span>
   </footer>
+  </div>
 </main>
 </div>
 
@@ -442,7 +508,7 @@
   var DEMO = {};
   var $ = function(id){ return document.getElementById(id); };
 
-  document.documentElement.dataset.tpl = "jardin";
+  document.documentElement.dataset.tpl = "dos";
 
   /* Hoteles: link a Google Maps */
   document.querySelectorAll(".hotels").forEach(function(ul){
@@ -601,6 +667,19 @@
   var done=false, PREVIEW=!!document.querySelector(".switch");
   if(!PREVIEW){ try{ done = localStorage.getItem("quizOK")==="1"; }catch(e){} }
   if(!done) openQuiz();
+
+
+  /* Segunda parte: se abre con "Continuar" (y queda abierta para quien vuelve a entrar) */
+  function openPart2(scroll){
+    var p2=$("part2"); if(!p2.hidden) return;
+    p2.hidden=false; p2.classList.add("p2-in"); $("cont-btn").setAttribute("aria-expanded","true");
+    $("p1-full").hidden=true; $("strip").hidden=false;   /* la primera parte queda como franja */
+    try{ localStorage.setItem("p2","1"); }catch(e){}
+    if(scroll) window.scrollTo(0,0);
+  }
+  $("cont-btn").addEventListener("click", function(){ openPart2(true); });
+  $("strip-more").addEventListener("click", function(){ $("p1-full").hidden=false; $("strip").hidden=true; $("cont-btn").parentNode.hidden=true; });
+  try{ if(localStorage.getItem("p2")==="1" && !document.querySelector(".switch")) openPart2(false); }catch(e){}
 
   /* Regalos: datos ocultos hasta tocar el botón */
   $("show-alias").addEventListener("click", function(){
