@@ -43,6 +43,7 @@
           --head:var(--on-deep); --line:color-mix(in srgb, var(--on-deep) 22%, transparent); --on-ink:var(--deep); --card:color-mix(in srgb, var(--on-deep) 8%, transparent);}
   .s-deep .ill{color:var(--accent2);}
   section.s-deep + section, section + section.s-deep, footer.s-deep{border-top-color:transparent;}
+  :root{ --fail:#B54A3C; }
   :root{ --font:"Cormorant Garamond", "Cormorant", Garamond, Georgia, serif; --r:12px; }
 
   [hidden]{display:none!important;}
@@ -162,6 +163,36 @@
          display:flex; flex-direction:column; align-items:center; gap:6px;}
   footer .sig{font-size:2.2rem; font-style:italic; letter-spacing:0; color:var(--head);}
   .credit{font-size:.72rem; letter-spacing:.06em; opacity:.8; margin-top:6px;}
+
+  /* ---------- Juego de entrada ---------- */
+  .quiz{position:fixed; inset:0; z-index:40; background:var(--bg); color:var(--ink); font-family:var(--font); overflow-y:auto;
+        display:flex; justify-content:center;}
+  .quiz .qwrap{width:100%; max-width:460px; min-height:100%; padding:calc(28px + env(safe-area-inset-top,0px)) 28px calc(28px + env(safe-area-inset-bottom,0px));
+        display:flex; flex-direction:column; align-items:center; text-align:center; gap:18px;}
+  .quiz .qtop{width:100%; display:flex; justify-content:space-between; align-items:center; font-size:.75rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-soft);}
+  .quiz .skip{background:none; border:0; font-family:var(--font); font-size:.85rem; letter-spacing:.1em; color:var(--ink-soft); text-decoration:underline; cursor:pointer; padding:6px;}
+  .quiz .dots{display:flex; gap:6px;}
+  .quiz .dots i{width:7px; height:7px; border-radius:50%; background:var(--line);}
+  .quiz .dots i.on{background:var(--head);}
+  .quiz .stage{flex:1; width:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:22px; position:relative;}
+  .quiz .ill{margin:0;}
+  .quiz .q{font-size:2.1rem; line-height:1.15; font-style:italic; font-weight:500; color:var(--head); text-wrap:balance; max-width:16ch;}
+  .quiz .opts{width:100%; display:flex; flex-direction:column; gap:10px;}
+  .quiz .opt{width:100%; font-family:var(--font); font-size:1.2rem; font-weight:500; color:var(--ink); background:var(--card); border:1px solid var(--line);
+        border-radius:var(--r); padding:14px 16px; cursor:pointer; transition:border-color .15s, transform .15s;}
+  .quiz .opt:hover{border-color:var(--head);}
+  .quiz .opt:active{transform:scale(.98);}
+  .quiz .opt:focus-visible,.quiz .skip:focus-visible{outline:2px solid var(--head); outline-offset:2px;}
+  .quiz .yesno{position:relative; width:100%; height:150px;}
+  .quiz .yesno .btn{position:absolute; top:20px; min-width:120px; transition:left .25s ease, top .25s ease;}
+  .quiz .fail{font-size:clamp(2.2rem,11vw,3rem); line-height:1; font-weight:600; letter-spacing:.02em; text-transform:uppercase; color:var(--fail); text-wrap:balance;}
+  .quiz .fail b{font-weight:600;}
+  .quiz .sub{font-size:1.25rem; color:var(--ink-soft); max-width:22ch;}
+  .quiz .big{font-size:1rem; letter-spacing:.3em; text-transform:uppercase; color:var(--ink-soft);}
+  .quiz .enter{animation:qin .35s ease both;}
+  @keyframes qin{from{opacity:0; translate:0 10px}to{opacity:1; translate:0 0}}
+  .quiz .shake{animation:qshake .4s ease;}
+  @keyframes qshake{20%,60%{translate:-6px 0}40%,80%{translate:6px 0}}
 
   /* Música */
   .fab{color:var(--head); position:fixed; z-index:20; top:calc(14px + env(safe-area-inset-top,0px)); right:max(14px, calc(50% - 230px + 14px));
@@ -383,6 +414,13 @@
   <svg aria-hidden="true"><use href="#i-note"/></svg>
 </button>
 
+<div class="quiz" id="quiz" hidden>
+  <div class="qwrap">
+    <div class="qtop"><div class="dots" id="q-dots" aria-hidden="true"></div><button class="skip" type="button" id="q-skip">Saltar</button></div>
+    <div class="stage" id="q-stage" aria-live="polite"></div>
+  </div>
+</div>
+
 <div class="gate" id="gate">
   <div class="card">
     <svg aria-hidden="true"><use href="#i-note"/></svg>
@@ -477,6 +515,78 @@
   $("fab").addEventListener("click", function(){ setMusic(!on); });
   $("g-on").addEventListener("click", function(){ $("gate").hidden=true; setMusic(true); });
   $("g-off").addEventListener("click", function(){ $("gate").hidden=true; });
+
+  /* ===== Juego de entrada ===== */
+  var RINGS='<svg class="ill sm" viewBox="0 0 80 44" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="31" cy="24" r="14"/><circle cx="49" cy="24" r="14"/><path d="M46 7 l3 -4 l3 4 l-3 3z" fill="currentColor" fill-opacity=".2" stroke-linejoin="round"/></svg>';
+  var QS = [
+    { q:"¿Querés venir a nuestro casamiento?", yesno:true },
+    { q:"¿Cuándo vas a confirmar?", opts:["Hoy mismo","Esta semana","El 28 de febrero a la noche"],
+      trap:2, fail:"El 28 de febrero a la noche", why:"Perdiste. Los novios ya sufrieron bastante." },
+    { q:"¿Qué tan feliz te pone venir?", opts:["Mucho","Muchísimo","No duermo desde que me enteré"] },
+    { q:"¿Quién va a llorar más?", opts:["Nacho","Mili","Los dos","Yo"] },
+    { q:"¿Hasta qué hora te quedás?", opts:["Hasta que prendan las luces","Me voy después de la torta","Hasta el último tema"],
+      trap:1, fail:"Te vas después de la torta", why:"Perdiste. Acá se baila hasta el final." },
+    { q:"¿De qué color va a ser tu ropa?", opts:["Verde","Azul","Blanco","Rosa viejo"],
+      trap:2, fail:"Ropa blanca", why:"Perdiste. El blanco es exclusivo de la novia." }
+  ];
+  var quiz=$("quiz"), stage=$("q-stage"), dots=$("q-dots"), qi=0;
+  function mkDots(){ dots.innerHTML=""; QS.forEach(function(_,i){ var d=document.createElement("i"); if(i<=qi) d.className="on"; dots.appendChild(d); }); }
+  function el(tag, cls, txt){ var e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e; }
+  function render(node){ stage.innerHTML=""; node.classList.add("enter"); stage.appendChild(node); var f=node.querySelector("button"); if(f) f.focus({preventScroll:true}); }
+  function showQ(){
+    mkDots(); var Q=QS[qi], box=el("div","stage-in"); box.style.cssText="width:100%;display:flex;flex-direction:column;align-items:center;gap:22px";
+    box.appendChild(el("p","big","Pregunta "+(qi+1)+" de "+QS.length));
+    box.appendChild(el("p","q",Q.q));
+    if(Q.yesno){
+      var yn=el("div","yesno"), yes=el("button","btn","Sí"), no=el("button","btn ghost","No");
+      yes.type=no.type="button"; yes.style.left="calc(50% - 130px)"; no.style.left="calc(50% + 10px)";
+      yes.addEventListener("click", nextQ);
+      function run(e){ if(e) e.preventDefault();
+        var W=yn.clientWidth-no.offsetWidth, H=yn.clientHeight-no.offsetHeight, y=yes.offsetLeft, x, t, k=0;
+        do { x=Math.random()*W; t=Math.random()*H; k++; }
+        while(k<30 && x+no.offsetWidth>y-12 && x<y+yes.offsetWidth+12 && t<yes.offsetTop+yes.offsetHeight+12);
+        no.style.left=Math.max(0,x)+"px"; no.style.top=Math.max(0,t)+"px"; }
+      no.addEventListener("pointerenter", run); no.addEventListener("touchstart", run, {passive:false});
+      no.addEventListener("click", function(){ yn.classList.remove("shake"); void yn.offsetWidth; yn.classList.add("shake"); run(); });
+      yn.appendChild(yes); yn.appendChild(no); box.appendChild(yn);
+    } else {
+      var opts=el("div","opts");
+      Q.opts.forEach(function(t,i){ var b=el("button","opt",t); b.type="button";
+        b.addEventListener("click", function(){ (Q.trap===i) ? showFail(Q) : nextQ(); }); opts.appendChild(b); });
+      box.appendChild(opts);
+    }
+    render(box);
+  }
+  function showFail(Q){
+    var box=el("div"); box.style.cssText="width:100%;display:flex;flex-direction:column;align-items:center;gap:16px";
+    var f=el("p","fail"); f.innerHTML="&#10005; "; f.appendChild(document.createTextNode(Q.fail)); box.appendChild(f);
+    box.appendChild(el("p","sub",Q.why));
+    var b=el("button","btn","Intentar de nuevo"); b.type="button"; b.addEventListener("click", showQ); box.appendChild(b);
+    render(box);
+  }
+  function nextQ(){ qi++; if(qi<QS.length) showQ(); else showPass(); }
+  function showPass(){
+    mkDots(); var box=el("div"); box.style.cssText="width:100%;display:flex;flex-direction:column;align-items:center;gap:16px";
+    var ic=el("div"); ic.innerHTML=RINGS; box.appendChild(ic.firstChild);
+    box.appendChild(el("p","q","¡Aprobaste!"));
+    box.appendChild(el("p","sub","Ya tenés tu lugar en nuestro casamiento."));
+    var b=el("button","btn","Abrir invitación"); b.type="button"; b.addEventListener("click", function(){ closeQuiz(true); }); box.appendChild(b);
+    var n=el("button","g2","Abrir sin música"); n.type="button"; n.style.cssText="background:none;border:0;font-family:var(--font);font-size:1rem;color:var(--ink-soft);text-decoration:underline;cursor:pointer";
+    n.addEventListener("click", function(){ closeQuiz(false); }); box.appendChild(n);
+    render(box);
+  }
+  function closeQuiz(music){
+    quiz.hidden=true; document.documentElement.style.overflow="";
+    try{ localStorage.setItem("quizOK","1"); }catch(e){}
+    if(music===null){ $("gate").hidden=false; return; }
+    $("gate").hidden=true; if(music) setMusic(true);
+    window.scrollTo(0,0);
+  }
+  function openQuiz(){ qi=0; quiz.hidden=false; $("gate").hidden=true; document.documentElement.style.overflow="hidden"; showQ(); }
+  $("q-skip").addEventListener("click", function(){ closeQuiz(null); });
+  var done=false, PREVIEW=!!document.querySelector(".switch");
+  if(!PREVIEW){ try{ done = localStorage.getItem("quizOK")==="1"; }catch(e){} }
+  if(!done) openQuiz();
 
   /* Regalos: datos ocultos hasta tocar el botón */
   $("show-alias").addEventListener("click", function(){
