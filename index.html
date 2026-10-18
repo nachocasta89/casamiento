@@ -155,7 +155,7 @@
   .thanks{padding:20px; background:var(--card); border:1px solid var(--head); border-radius:var(--r); width:100%;}
 
   /* Canción */
-  .player{width:100%; aspect-ratio:16/9; max-width:100%; border-radius:var(--r); overflow:hidden; background:var(--soft);
+  .player{width:100%; aspect-ratio:16/9; min-height:200px; max-width:100%; border-radius:var(--r); overflow:hidden; background:var(--soft);
           display:flex; align-items:center; justify-content:center; color:var(--ink-soft); font-size:.95rem; text-align:center; padding:12px;}
   .player iframe{width:100%; height:100%; border:0;}
 
@@ -399,7 +399,8 @@
       <circle cx="30" cy="30" r="25"/><circle cx="30" cy="30" r="18" stroke-dasharray="1 3"/><circle cx="30" cy="30" r="8"/><circle cx="30" cy="30" r="1.8" fill="currentColor"/>
     </svg>
     <h2>Nuestra canción</h2>
-    <div class="player" id="player">El video de YouTube aparece en la versión publicada</div>
+    <button class="btn ghost" type="button" id="song-btn" aria-expanded="false" aria-controls="player">Escuchar</button>
+    <div class="player" id="player" hidden>Cargando…</div>
   </section>
 
   <footer class="s-deep">
@@ -493,20 +494,33 @@
       next += BAR; step++;
     }
   }
+  /* El video queda en una tarjeta cerrada; se crea recién cuando alguien la abre o activa la música */
+  var apiReady=false, wantPlayer=false;
+  function makePlayer(){
+    $("player").textContent = ""; var h=document.createElement("div"); h.id="yt"; $("player").appendChild(h);
+    yt = new YT.Player("yt", { videoId:YT_ID, playerVars:{ loop:1, playlist:YT_ID, playsinline:1, rel:0 },
+      events:{ onReady:function(){ ytReady=true; if(on) yt.playVideo(); },
+               onStateChange:function(ev){ if(ev.data===1 && !on){ on=true; syncFab(); } if(ev.data===2 && on){ on=false; syncFab(); } } } });
+  }
+  function openSong(){
+    $("player").hidden=false; $("song-btn").setAttribute("aria-expanded","true"); $("song-btn").textContent="Ocultar";
+    wantPlayer=true; if(apiReady && !yt) makePlayer();
+  }
+  function closeSong(){
+    $("player").hidden=true; $("song-btn").setAttribute("aria-expanded","false"); $("song-btn").textContent="Escuchar";
+  }
+  $("song-btn").addEventListener("click", function(){
+    if($("player").hidden){ openSong(); setMusic(true); } else { setMusic(false); closeSong(); }
+  });
   if(YT_ID){
-    window.onYouTubeIframeAPIReady = function(){
-      $("player").textContent = ""; var h=document.createElement("div"); h.id="yt"; $("player").appendChild(h);
-      yt = new YT.Player("yt", { videoId:YT_ID, playerVars:{ loop:1, playlist:YT_ID, playsinline:1, rel:0 },
-        events:{ onReady:function(){ ytReady=true; if(on) yt.playVideo(); },
-                 onStateChange:function(ev){ if(ev.data===1 && !on){ on=true; syncFab(); } if(ev.data===2 && on){ on=false; syncFab(); } } } });
-    };
+    window.onYouTubeIframeAPIReady = function(){ apiReady=true; if(wantPlayer && !yt) makePlayer(); };
     var s=document.createElement("script"); s.src="https://www.youtube.com/iframe_api";
     s.onerror=function(){ YT_ID=""; if(on) setMusic(true); };
     document.head.appendChild(s);
   }
   function setMusic(v){
     on=v; syncFab();
-    if(YT_ID){ if(yt && ytReady){ if(on) yt.playVideo(); else yt.pauseVideo(); } return; }
+    if(YT_ID){ if(on) openSong(); if(yt && ytReady){ if(on) yt.playVideo(); else yt.pauseVideo(); } return; }
     try{
       if(on){ if(!ctx) initAudio(); ctx.resume(); next=ctx.currentTime+0.1; clearInterval(sched); schedule(); sched=setInterval(schedule,250); }
       else { clearInterval(sched); if(ctx) ctx.suspend(); }
