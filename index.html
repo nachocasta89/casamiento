@@ -281,6 +281,18 @@
   :root[data-tpl="verde"] .quiz .opt{border:1.5px solid #A9B98F;}
   :root[data-tpl="verde"] .quiz .opt:hover{border-color:var(--head);}
 
+  /* Fecha límite de confirmación */
+  .deadline{display:flex; flex-direction:column; align-items:center; gap:2px; padding:14px 26px; margin:2px 0 6px; background:var(--card);
+       border:1px solid var(--head); border-radius:var(--r); outline:1px solid var(--line); outline-offset:-6px;
+       box-shadow:0 8px 20px -12px rgba(40,55,30,.45);}
+  .dl-label{font-size:.72rem; letter-spacing:.26em; text-transform:uppercase; color:var(--ink-soft);}
+  .dl-date{font-family:var(--display, var(--font)); font-size:clamp(1.05rem,5.4vw,1.3rem); white-space:nowrap; font-weight:600; color:var(--head); text-transform:uppercase; line-height:1.2; text-align:center;}
+  /* Dos alias */
+  .alias-row{width:100%; display:flex; flex-direction:column; align-items:center; gap:6px; padding:10px 0;}
+  .alias-row + .alias-row{border-top:1px dashed var(--line);}
+  .alias-row .cur{font-size:.72rem; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-soft);}
+  .alias-row code{font-family:var(--font); font-size:1.2rem; font-weight:600; word-break:break-all; user-select:all;}
+
   @media (prefers-reduced-motion:reduce){ *{transition:none!important; animation:none!important;} }
 </style>
 
@@ -352,14 +364,14 @@
     <h2>La fiesta</h2>
     <div class="facts">
       <div class="fact"><p class="label">Fecha</p><span>Sábado 27 de marzo de 2027</span></div>
-      <div class="fact"><p class="label">Recepción</p><span>14:00 hs</span></div>
-      <div class="fact"><p class="label">Ceremonia civil</p><span>15:00 hs</span></div>
+      <div class="fact"><p class="label">Recepción</p><span>15:00 hs</span></div>
+      <div class="fact"><p class="label">Ceremonia civil</p><span>16:00 hs</span></div>
       <div class="fact"><p class="label">Lugar</p><span>Buena Vista, Salta</span></div>
     </div>
     <div class="btns">
       <a class="btn" href="https://maps.app.goo.gl/t93KvMgsjt9VQDAX9" target="_blank" rel="noopener">Cómo llegar</a>
       <a class="btn ghost" target="_blank" rel="noopener"
-         href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Casamiento%20Nacho%20y%20Mili&dates=20270327T170000Z/20270328T060000Z&location=Buena%20Vista%2C%20Salta&details=https%3A%2F%2Fmaps.app.goo.gl%2Ft93KvMgsjt9VQDAX9">Agendar</a>
+         href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Casamiento%20Nacho%20y%20Mili&dates=20270327T180000Z/20270328T060000Z&location=Buena%20Vista%2C%20Salta&details=https%3A%2F%2Fmaps.app.goo.gl%2Ft93KvMgsjt9VQDAX9">Agendar</a>
     </div>
   </section>
   </div>
@@ -428,9 +440,9 @@
     <div class="reveal">
       <button class="btn ghost" type="button" id="show-alias" aria-expanded="false" aria-controls="alias-box">Hacer un regalo</button>
       <div class="alias-box" id="alias-box" hidden>
-        <p class="label">Alias · banco o Mercado Pago</p>
-        <code id="alias">Nacho.casta.gal</code>
-        <button class="copy" type="button" id="copy">Copiar</button>
+        <p class="label">Alias</p>
+        <div class="alias-row"><span class="cur">Pesos (ARS)</span><code>NachoyMili.2027.ARS</code><button class="copy" type="button">Copiar</button></div>
+        <div class="alias-row"><span class="cur">Dólares (USD)</span><code>NachoyMili.2027.usd</code><button class="copy" type="button">Copiar</button></div>
       </div>
     </div>
   </section>
@@ -442,7 +454,7 @@
       <path d="M50 30c-3-4-9-2-7 3 1 3 7 7 7 7s6-4 7-7c2-5-4-7-7-3z" fill="currentColor" fill-opacity=".25"/>
     </svg>
     <h2>Confirmá tu asistencia</h2>
-    <p class="soft">Antes del 1 de marzo de 2027</p>
+    <div class="deadline"><span class="dl-label">Confirmá antes del</span><span class="dl-date">15 de diciembre de 2026</span></div>
 
     <div class="locked" id="locked">Para confirmar, usá el link personal que te mandamos por WhatsApp.</div>
 
@@ -504,7 +516,7 @@
 
 <div class="lang" role="group" aria-label="Idioma / Language">
   <button type="button" data-lang="es" aria-pressed="true"><svg viewBox="0 0 14 14" aria-hidden="true"><clipPath id="c-ar"><circle cx="7" cy="7" r="7"/></clipPath><g clip-path="url(#c-ar)"><rect width="14" height="14" fill="#F4F1E6"/><rect width="14" height="4.7" fill="#8DBBE0"/><rect y="9.3" width="14" height="4.7" fill="#8DBBE0"/><circle cx="7" cy="7" r="1.5" fill="#E9B949"/></g></svg>ES</button>
-  <button type="button" data-lang="en" aria-pressed="false"><svg viewBox="0 0 14 14" aria-hidden="true"><clipPath id="c-uk"><circle cx="7" cy="7" r="7"/></clipPath><g clip-path="url(#c-uk)"><rect width="14" height="14" fill="#2B4B8A"/><path d="M0 0L14 14M14 0L0 14" stroke="#F4F1E6" stroke-width="2.6"/><path d="M0 0L14 14M14 0L0 14" stroke="#C8535C" stroke-width="1"/><path d="M7 0V14M0 7H14" stroke="#F4F1E6" stroke-width="3.6"/><path d="M7 0V14M0 7H14" stroke="#C8535C" stroke-width="2"/></g></svg>EN</button>
+  <button type="button" data-lang="en" aria-pressed="false"><svg viewBox="0 0 14 14" aria-hidden="true"><clipPath id="c-us"><circle cx="7" cy="7" r="7"/></clipPath><g clip-path="url(#c-us)"><rect width="14" height="14" fill="#F4F1E6"/><path d="M0 1.1h14M0 3.3h14M0 5.5h14M0 7.7h14M0 9.9h14M0 12.1h14" stroke="#C8535C" stroke-width="1.1"/><rect width="7.2" height="6.6" fill="#2B4B8A"/><g fill="#F4F1E6"><circle cx="1.9" cy="1.8" r=".55"/><circle cx="4.5" cy="1.8" r=".55"/><circle cx="3.2" cy="3.3" r=".55"/><circle cx="1.9" cy="4.8" r=".55"/><circle cx="4.5" cy="4.8" r=".55"/></g></g></svg>EN</button>
 </div>
 
 <div class="gate" id="gate">
@@ -619,8 +631,8 @@
   var RINGS='<svg class="ill sm" viewBox="0 0 80 44" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="31" cy="24" r="14"/><circle cx="49" cy="24" r="14"/><path d="M46 7 l3 -4 l3 4 l-3 3z" fill="currentColor" fill-opacity=".2" stroke-linejoin="round"/></svg>';
   var QS = [
     { q:"¿Querés venir a nuestro casamiento?", yesno:true },
-    { q:"¿Cuándo vas a confirmar?", opts:["Hoy mismo","Esta semana","El 28 de febrero a la noche"],
-      trap:2, fail:"El 28 de febrero a la noche", why:"Perdiste. Los novios ya sufrieron bastante." },
+    { q:"¿Cuándo vas a confirmar?", opts:["Hoy mismo","Esta semana","El 14 de diciembre a la noche"],
+      trap:2, fail:"El 14 de diciembre a la noche", why:"Perdiste. Los novios ya sufrieron bastante." },
     { q:"¿Qué tan feliz te pone venir?", opts:["Mucho","Muchísimo","No duermo desde que me enteré"] },
     { q:"¿Quién va a llorar más?", opts:["Nacho","Mili","Los dos","Yo"] },
     { q:"¿Hasta qué hora te quedás?", opts:["Hasta que prendan las luces","Me voy después de la torta","Hasta el último tema"],
@@ -693,13 +705,12 @@
     var box=$("alias-box"), open=box.hidden; box.hidden=!open;
     this.setAttribute("aria-expanded", open); this.textContent = open ? "Ocultar" : "Hacer un regalo";
   });
-  var cb=$("copy");
-  cb.addEventListener("click", function(){
-    var el=$("alias");
+  document.querySelectorAll(".alias-row .copy").forEach(function(cb){ cb.addEventListener("click", function(){
+    var el=cb.parentNode.querySelector("code");
     function done(){ cb.textContent="Copiado"; setTimeout(function(){ cb.textContent="Copiar"; },1800); }
     function fallback(){ var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r); cb.textContent="Seleccionado"; }
     try{ navigator.clipboard.writeText(el.textContent).then(done, fallback); }catch(err){ fallback(); }
-  });
+  }); });
 
   /* Invitación personal */
   function codeFromUrl(){ var q=new URLSearchParams(location.search).get("i"); return q || (location.hash ? location.hash.slice(1) : ""); }
@@ -767,7 +778,7 @@
     "Elegimos compartir este día con quienes hacen nuestra historia. Te esperamos.":"We chose to share this day with the people who are part of our story. We hope to see you there.",
     "Falta poco…":"Almost there…", "Cuenta regresiva":"Countdown", "días":"days", "horas":"hours", "min":"min", "seg":"sec",
     "La fiesta":"The party", "Fecha":"Date", "Sábado 27 de marzo de 2027":"Saturday, March 27, 2027", "Recepción":"Reception",
-    "14:00 hs":"2:00 pm", "Ceremonia civil":"Civil ceremony", "15:00 hs":"3:00 pm", "Lugar":"Venue", "Agendar":"Add to calendar",
+    "14:00 hs":"2:00 pm", "Ceremonia civil":"Civil ceremony", "15:00 hs":"3:00 pm", "16:00 hs":"4:00 pm", "Lugar":"Venue", "Agendar":"Add to calendar",
     "Continuar":"Continue", "Dress code":"Dress code", "Elegante sport":"Smart casual",
     "Info útil":"Good to know", "Es de tarde":"It's in the afternoon", "Llevá ropa cómoda y anteojos de sol.":"Wear something comfortable and bring sunglasses.",
     "Al aire libre":"Outdoors", "La ceremonia y la recepción son al aire libre, así que te recomendamos no usar taco aguja.":"The ceremony and reception are outdoors, so we recommend avoiding stilettos.",
@@ -776,9 +787,9 @@
     "Uber funciona muy bien, pero en Buena Vista hay poca señal: te recomendamos programar con anticipación el Uber o un remís para la vuelta, o coordinar una combi en grupo.":"Uber works well in Salta, but cell signal at Buena Vista is weak: we recommend scheduling your Uber or a taxi (remís) for the ride back in advance, or arranging a shared van with your group.",
     "Alojamiento":"Where to stay", "Si venís de afuera, algunas opciones:":"If you're coming from out of town, a few options:", "Salta capital":"Salta city",
     "Regalos":"Gifts", "El mejor regalo es que estés con nosotros. Y si además querés, podés hacernos un regalo por acá:":"Having you with us is the best gift. If you'd also like to give us something, you can do it here:",
-    "Hacer un regalo":"Send a gift", "Ocultar":"Hide", "Alias · banco o Mercado Pago":"Alias · Argentine bank transfer or Mercado Pago",
+    "Hacer un regalo":"Send a gift", "Ocultar":"Hide", "Alias":"Alias", "Pesos (ARS)":"Argentine pesos (ARS)", "Dólares (USD)":"US dollars (USD)",
     "Copiar":"Copy", "Copiado":"Copied", "Seleccionado":"Selected",
-    "Confirmá tu asistencia":"RSVP", "Antes del 1 de marzo de 2027":"By March 1, 2027",
+    "Confirmá tu asistencia":"RSVP", "Confirmá antes del":"Please RSVP by", "15 de diciembre de 2026":"December 15, 2026",
     "Para confirmar, usá el link personal que te mandamos por WhatsApp.":"To RSVP, please use the personal link we sent you on WhatsApp.",
     "Tildá quiénes van":"Check who's coming", "Restricción alimentaria":"Dietary restriction",
     "Sin restricciones":"None", "Vegetariano":"Vegetarian", "Vegano":"Vegan", "Celíaco (sin TACC)":"Celiac (gluten-free)", "Otra":"Other", "¿Cuál?":"Which one?",
@@ -794,7 +805,7 @@
     "Activar música":"Play music", "Pausar música":"Pause music", "Saltar":"Skip",
     "Activá el sonido para vivirla completa":"Turn on the sound for the full experience", "Seguir sin música":"Continue without music",
     "¿Querés venir a nuestro casamiento?":"Do you want to come to our wedding?", "Sí":"Yes", "No":"No",
-    "¿Cuándo vas a confirmar?":"When will you RSVP?", "Hoy mismo":"Today", "Esta semana":"This week", "El 28 de febrero a la noche":"February 28th, late at night",
+    "¿Cuándo vas a confirmar?":"When will you RSVP?", "Hoy mismo":"Today", "Esta semana":"This week", "El 14 de diciembre a la noche":"December 14th, late at night",
     "Perdiste. Los novios ya sufrieron bastante.":"You lost. The couple has suffered enough.",
     "¿Qué tan feliz te pone venir?":"How happy are you to come?", "Mucho":"Very", "Muchísimo":"Extremely", "No duermo desde que me enteré":"I haven't slept since I found out",
     "¿Quién va a llorar más?":"Who's going to cry the most?", "Los dos":"Both", "Yo":"Me",
